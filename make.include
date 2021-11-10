@@ -1,0 +1,11 @@
+# COMMANDS THAT ARE INCLUDED IN ALL MAKEFILES.  
+#
+# You may wish to modify this file to fit your local installation.
+
+CC     = gcc                                  # C compiler to use
+CFLAGS = -O $(shell root-config --cflags)     # C compiler options when compiling .c files to .o files
+
+#CFLAGS = -pthread -std=c++11 -m64 -I/cvmfs/cms.cern.ch/slc7_amd64_gcc900/lcg/root/6.24.07-db9b7135424812ed5b8723a7a77f4016/include
+#CFLAGS = -pthread -lstdc=c++11 -m64 -I/cvmfs/cms.cern.ch/slc7_amd64_gcc900/lcg/root/6.24.07-db9b7135424812ed5b8723a7a77f4016/include
+
+LFLAGS = $(shell root-config --libs) -lstdc++ # Options when linking .o files; sometimes -lstdc++ option is needed

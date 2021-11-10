@@ -25,6 +25,7 @@ scale I hope to reimplement BNN in [TMVA package](http://tmva.sourceforge.net/).
 1. Copy to workdir:
 ```
 cd workdir
+git clone link
 ```
 
 2. Activate env: 
@@ -34,14 +35,12 @@ source env.sh
 
 3. Clean and build project:
 ```
-./make-clean
-./make-all 
+./make-clean && ./make-all 
 ```
 
 4. Checking the health of the project
 ```
-cd bnn-hep/test
-bnn-hep bnn-hep tWb.cfg
+cd bnn-hep/test && bnn-hep tWb.cfg
 ```
 
   + tWb.cfg main parametrs:
@@ -74,7 +73,7 @@ source dnn_env.sh
 
 3. Train model: 
 ```
-python trainModel.py --taskName BNN_tWb_8 --taskName BNN_tWb_8 --layers 3 --externalEepoch 10 --internalEpoch 100 --modelName testModel
+python trainModel.py --taskName BNN_tWb_8 --layers 3 --externalEepoch 10 --internalEpoch 100 --modelName testModel
 ```
 
 + taskName - BNN_tWb_8 same the bnn taskName.

@@ -35,12 +35,15 @@ source env.sh
 
 3. Clean and build project:
 ```
-./make-clean && ./make-all 
+./make-clean
+./make-all 
 ```
 
 # How to use bnn-hep: 
 ```
-cd bnn-hep/test && bnn-hep tWb.cfg
+mkdir build
+cd build
+bnn-hep /path/tWb.cfg
 ```
 
   + tWb.cfg main parametrs:

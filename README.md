@@ -20,7 +20,7 @@ this reason no active development of the tool is expected, but only bugfixes and
 scale I hope to reimplement BNN in [TMVA package](http://tmva.sourceforge.net/).
 
 
-# Install and use: 
+# How to install bnn-hep: 
 
 1. Copy to workdir:
 ```
@@ -38,7 +38,7 @@ source env.sh
 ./make-clean && ./make-all 
 ```
 
-4. Checking the health of the project
+# How to use bnn-hep: 
 ```
 cd bnn-hep/test && bnn-hep tWb.cfg
 ```

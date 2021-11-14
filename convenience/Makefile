@@ -1,9 +1,9 @@
 # Define the flags to control make
 CC = g++
-INCLUDE = -Iinclude -I../bnn-hep/include/ -I$(shell root-config --incdir) -I/cvmfs/sft.cern.ch/lcg/external/Boost/1.53.0_python2.7/x86_64-slc6-gcc48-opt/iclude/boost-1_53/
+INCLUDE = -Iinclude -I../bnn-hep/include/ -I$(shell root-config --incdir) -I${BOOST_LIBRARY_PATH}/include/boost-${BOOST_VERSION}/
 OPFLAGS = 
 CFLAGS = -Wall -Wextra -std=c++11 $(INCLUDE) $(OPFLAGS)
-LDFLAGS = $(shell root-config --libs) -L/cvmfs/sft.cern.ch/lcg/external/Boost/1.53.0_python2.7/x86_64-slc6-gcc48-opt/lib/ -lboost_filesystem-gcc48-mt-1_53 -lboost_system
+LDFLAGS = $(shell root-config --libs) -L${BOOST_LIBRARY_PATH}lib/ -lboost_filesystem-gcc48-mt-${BOOST_VERSION} -lboost_system-gcc48-mt-${BOOST_VERSION}
 
 vpath %.cpp src ../bnn-hep/src
 

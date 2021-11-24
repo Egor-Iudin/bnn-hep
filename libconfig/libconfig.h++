@@ -316,12 +316,12 @@ namespace libconfig
 
     void remove(unsigned int idx);
 
-    inline Setting &add(const std::string &name, Type type) throw(SettingNameException, SettingTypeException)
+    inline Setting &add(const std::string &name, Type type)
     {
       return (add(name.c_str(), type));
     }
 
-    Setting &add(const char *name, Type type) throw(SettingNameException, SettingTypeException);
+    Setting &add(const char *name, Type type);
 
     Setting &add(Type type);
 
@@ -337,8 +337,8 @@ namespace libconfig
     std::string getPath() const;
     int getIndex() const throw();
 
-    const Setting &getParent() const throw(SettingNotFoundException);
-    Setting &getParent() throw(SettingNotFoundException);
+    const Setting &getParent() const;
+    Setting &getParent();
 
     bool isRoot() const throw();
 

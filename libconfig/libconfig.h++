@@ -192,8 +192,7 @@ namespace libconfig
 
     Setting(config_setting_t *setting);
 
-    void assertType(Type type) const
-        throw(SettingTypeException);
+    void assertType(Type type) const;
     static Setting &wrapSetting(config_setting_t *setting);
 
     Setting(const Setting &other);            // not supported
@@ -207,31 +206,31 @@ namespace libconfig
     inline Format getFormat() const throw() { return (_format); }
     void setFormat(Format format) throw();
 
-    operator bool() const throw(SettingTypeException);
-    operator int() const throw(SettingTypeException);
-    operator unsigned int() const throw(SettingTypeException);
-    operator long() const throw(SettingTypeException);
-    operator unsigned long() const throw(SettingTypeException);
-    operator long long() const throw(SettingTypeException);
-    operator unsigned long long() const throw(SettingTypeException);
-    operator double() const throw(SettingTypeException);
-    operator float() const throw(SettingTypeException);
-    operator const char *() const throw(SettingTypeException);
-    operator std::string() const throw(SettingTypeException);
+    operator bool() const;
+    operator int() const;
+    operator unsigned int() const;
+    operator long() const;
+    operator unsigned long() const;
+    operator long long() const;
+    operator unsigned long long() const;
+    operator double() const;
+    operator float() const;
+    operator const char *() const;
+    operator std::string() const;
 
-    inline const char *c_str() const throw(SettingTypeException)
+    inline const char *c_str() const
     {
       return operator const char *();
     }
 
-    Setting &operator=(bool value) throw(SettingTypeException);
-    Setting &operator=(int value) throw(SettingTypeException);
-    Setting &operator=(long value) throw(SettingTypeException);
-    Setting &operator=(const long long &value) throw(SettingTypeException);
-    Setting &operator=(const double &value) throw(SettingTypeException);
-    Setting &operator=(float value) throw(SettingTypeException);
-    Setting &operator=(const char *value) throw(SettingTypeException);
-    Setting &operator=(const std::string &value) throw(SettingTypeException);
+    Setting &operator=(bool value);
+    Setting &operator=(int value);
+    Setting &operator=(long value);
+    Setting &operator=(const long long &value);
+    Setting &operator=(const double &value);
+    Setting &operator=(float value);
+    Setting &operator=(const char *value);
+    Setting &operator=(const std::string &value);
 
     Setting &operator[](const char *key) const
         throw(SettingTypeException, SettingNotFoundException);

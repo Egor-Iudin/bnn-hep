@@ -622,209 +622,343 @@ namespace libconfig
 
   // ---------------------------------------------------------------------------
 
-  Setting::operator bool() const throw(SettingTypeException)
+  Setting::operator bool() const
   {
-    assertType(TypeBoolean);
+    try
+    {
+      assertType(TypeBoolean);
 
-    return (config_setting_get_bool(_setting) ? true : false);
+      return (config_setting_get_bool(_setting) ? true : false);
+    }
+    catch (const SettingTypeException &)
+    {
+      throw;
+    }
   }
 
   // ---------------------------------------------------------------------------
 
-  Setting::operator int() const throw(SettingTypeException)
+  Setting::operator int() const
   {
-    assertType(TypeInt);
+    try
+    {
+      assertType(TypeInt);
 
-    return (config_setting_get_int(_setting));
+      return (config_setting_get_int(_setting));
+    }
+    catch (const SettingTypeException &)
+    {
+      throw;
+    }
   }
 
   // ---------------------------------------------------------------------------
 
-  Setting::operator unsigned int() const throw(SettingTypeException)
+  Setting::operator unsigned int() const
   {
-    assertType(TypeInt);
+    try
+    {
+      assertType(TypeInt);
 
-    int v = config_setting_get_int(_setting);
+      int v = config_setting_get_int(_setting);
 
-    if (v < 0)
-      v = 0;
+      if (v < 0)
+        v = 0;
 
-    return (static_cast<unsigned int>(v));
+      return (static_cast<unsigned int>(v));
+    }
+    catch (const SettingTypeException &)
+    {
+      throw;
+    }
   }
 
   // ---------------------------------------------------------------------------
 
-  Setting::operator long() const throw(SettingTypeException)
+  Setting::operator long() const
   {
-    if (sizeof(long) == sizeof(long long))
-      return operator long long();
-    else
-      return operator int();
+    try
+    {
+      if (sizeof(long) == sizeof(long long))
+        return operator long long();
+      else
+        return operator int();
+    }
+    catch (const SettingTypeException &)
+    {
+      throw;
+    }
   }
 
   // ---------------------------------------------------------------------------
 
-  Setting::operator unsigned long() const throw(SettingTypeException)
+  Setting::operator unsigned long() const
   {
-    if (sizeof(long) == sizeof(long long))
-      return operator unsigned long long();
-    else
-      return operator unsigned int();
+    try
+    {
+      if (sizeof(long) == sizeof(long long))
+        return operator unsigned long long();
+      else
+        return operator unsigned int();
+    }
+    catch (const SettingTypeException &)
+    {
+      throw;
+    }
   }
 
   // ---------------------------------------------------------------------------
 
-  Setting::operator long long() const throw(SettingTypeException)
+  Setting::operator long long() const
   {
-    assertType(TypeInt64);
+    try
+    {
+      assertType(TypeInt64);
 
-    return (config_setting_get_int64(_setting));
+      return (config_setting_get_int64(_setting));
+    }
+    catch (const SettingTypeException &)
+    {
+      throw;
+    }
   }
 
   // ---------------------------------------------------------------------------
 
-  Setting::operator unsigned long long() const throw(SettingTypeException)
+  Setting::operator unsigned long long() const
   {
-    assertType(TypeInt64);
+    try
+    {
+      assertType(TypeInt64);
 
-    long long v = config_setting_get_int64(_setting);
+      long long v = config_setting_get_int64(_setting);
 
-    if (v < INT64_CONST(0))
-      v = INT64_CONST(0);
+      if (v < INT64_CONST(0))
+        v = INT64_CONST(0);
 
-    return (static_cast<unsigned long long>(v));
+      return (static_cast<unsigned long long>(v));
+    }
+    catch (const SettingTypeException &)
+    {
+      throw;
+    }
   }
 
   // ---------------------------------------------------------------------------
 
-  Setting::operator double() const throw(SettingTypeException)
+  Setting::operator double() const
   {
-    assertType(TypeFloat);
+    try
+    {
+      assertType(TypeFloat);
 
-    return (config_setting_get_float(_setting));
+      return (config_setting_get_float(_setting));
+    }
+    catch (const SettingTypeException &)
+    {
+      throw;
+    }
   }
 
   // ---------------------------------------------------------------------------
 
-  Setting::operator float() const throw(SettingTypeException)
+  Setting::operator float() const
   {
-    assertType(TypeFloat);
+    try
+    {
 
-    // may cause loss of precision:
-    return (static_cast<float>(config_setting_get_float(_setting)));
+      assertType(TypeFloat);
+
+      // may cause loss of precision:
+      return (static_cast<float>(config_setting_get_float(_setting)));
+    }
+    catch (const SettingTypeException &)
+    {
+      throw;
+    }
   }
 
   // ---------------------------------------------------------------------------
 
-  Setting::operator const char *() const throw(SettingTypeException)
+  Setting::operator const char *() const
   {
-    assertType(TypeString);
+    try
+    {
+      assertType(TypeString);
 
-    return (config_setting_get_string(_setting));
+      return (config_setting_get_string(_setting));
+    }
+    catch (const SettingTypeException &)
+    {
+      throw;
+    }
   }
 
   // ---------------------------------------------------------------------------
 
-  Setting::operator std::string() const throw(SettingTypeException)
+  Setting::operator std::string() const
   {
-    assertType(TypeString);
+    try
+    {
+      assertType(TypeString);
 
-    const char *s = config_setting_get_string(_setting);
+      const char *s = config_setting_get_string(_setting);
 
-    std::string str;
-    if (s)
-      str = s;
+      std::string str;
+      if (s)
+        str = s;
 
-    return (str);
+      return (str);
+    }
+    catch (const SettingTypeException &)
+    {
+      throw;
+    }
   }
 
   // ---------------------------------------------------------------------------
 
-  Setting &Setting::operator=(bool value) throw(SettingTypeException)
+  Setting &Setting::operator=(bool value)
   {
-    assertType(TypeBoolean);
+    try
+    {
+      assertType(TypeBoolean);
 
-    config_setting_set_bool(_setting, value);
+      config_setting_set_bool(_setting, value);
 
-    return (*this);
+      return (*this);
+    }
+    catch (const SettingTypeException &)
+    {
+      throw;
+    }
   }
 
   // ---------------------------------------------------------------------------
 
-  Setting &Setting::operator=(int value) throw(SettingTypeException)
+  Setting &Setting::operator=(int value)
   {
-    assertType(TypeInt);
+    try
+    {
+      assertType(TypeInt);
 
-    config_setting_set_int(_setting, value);
+      config_setting_set_int(_setting, value);
 
-    return (*this);
+      return (*this);
+    }
+    catch (const SettingTypeException &)
+    {
+      throw;
+    }
   }
 
   // ---------------------------------------------------------------------------
 
-  Setting &Setting::operator=(long value) throw(SettingTypeException)
+  Setting &Setting::operator=(long value)
   {
-    if (sizeof(long) == sizeof(long long))
-      return (operator=(static_cast<long long>(value)));
-    else
-      return (operator=(static_cast<int>(value)));
+    try
+    {
+      if (sizeof(long) == sizeof(long long))
+        return (operator=(static_cast<long long>(value)));
+      else
+        return (operator=(static_cast<int>(value)));
+    }
+    catch (const SettingTypeException &)
+    {
+      throw;
+    }
   }
 
   // ---------------------------------------------------------------------------
 
-  Setting &Setting::operator=(const long long &value) throw(SettingTypeException)
+  Setting &Setting::operator=(const long long &value)
   {
-    assertType(TypeInt64);
+    try
+    {
+      assertType(TypeInt64);
 
-    config_setting_set_int64(_setting, value);
+      config_setting_set_int64(_setting, value);
 
-    return (*this);
+      return (*this);
+    }
+    catch (const SettingTypeException &)
+    {
+      throw;
+    }
   }
 
   // ---------------------------------------------------------------------------
 
-  Setting &Setting::operator=(const double &value) throw(SettingTypeException)
+  Setting &Setting::operator=(const double &value)
   {
-    assertType(TypeFloat);
+    try
+    {
+      assertType(TypeFloat);
 
-    config_setting_set_float(_setting, value);
+      config_setting_set_float(_setting, value);
 
-    return (*this);
+      return (*this);
+    }
+    catch (const SettingTypeException &)
+    {
+      throw;
+    }
   }
 
   // ---------------------------------------------------------------------------
 
-  Setting &Setting::operator=(float value) throw(SettingTypeException)
+  Setting &Setting::operator=(float value)
   {
-    assertType(TypeFloat);
+    try
+    {
+      assertType(TypeFloat);
 
-    double cvalue = static_cast<double>(value);
+      double cvalue = static_cast<double>(value);
 
-    config_setting_set_float(_setting, cvalue);
+      config_setting_set_float(_setting, cvalue);
 
-    return (*this);
+      return (*this);
+    }
+    catch (const SettingTypeException &)
+    {
+      throw;
+    }
   }
 
   // ---------------------------------------------------------------------------
 
-  Setting &Setting::operator=(const char *value) throw(SettingTypeException)
+  Setting &Setting::operator=(const char *value)
   {
-    assertType(TypeString);
+    try
+    {
+      assertType(TypeString);
 
-    config_setting_set_string(_setting, value);
+      config_setting_set_string(_setting, value);
 
-    return (*this);
+      return (*this);
+    }
+    catch (const SettingTypeException &)
+    {
+      throw;
+    }
   }
 
   // ---------------------------------------------------------------------------
 
-  Setting &Setting::operator=(const std::string &value) throw(SettingTypeException)
+  Setting &Setting::operator=(const std::string &value)
   {
-    assertType(TypeString);
+    try
+    {
+      assertType(TypeString);
 
-    config_setting_set_string(_setting, value.c_str());
+      config_setting_set_string(_setting, value.c_str());
 
-    return (*this);
+      return (*this);
+    }
+    catch (const SettingTypeException &)
+    {
+      throw;
+    }
   }
 
   // ---------------------------------------------------------------------------
@@ -1068,71 +1202,86 @@ namespace libconfig
 
   // ---------------------------------------------------------------------------
 
-  Setting &Setting::add(Setting::Type type) throw(SettingTypeException)
+  Setting &Setting::add(Setting::Type type)
   {
-    if ((_type != TypeArray) && (_type != TypeList))
-      throw SettingTypeException(*this);
 
-    if (_type == TypeArray)
+    try
     {
-      int idx = getLength();
+      if ((_type != TypeArray) && (_type != TypeList))
+        throw SettingTypeException(*this);
 
-      if (idx > 0)
+      if (_type == TypeArray)
       {
-        Setting::Type atype = operator[](0).getType();
-        if (type != atype)
-          throw SettingTypeException(*this, idx);
+        int idx = getLength();
+
+        if (idx > 0)
+        {
+          Setting::Type atype = operator[](0).getType();
+          if (type != atype)
+            throw SettingTypeException(*this, idx);
+        }
+        else
+        {
+          if ((type != TypeInt) && (type != TypeInt64) && (type != TypeFloat) && (type != TypeString) && (type != TypeBoolean))
+            throw SettingTypeException(*this, idx);
+        }
       }
-      else
+
+      int typecode = __toTypeCode(type);
+      config_setting_t *s = config_setting_add(_setting, NULL, typecode);
+
+      Setting &ns = wrapSetting(s);
+
+      switch (type)
       {
-        if ((type != TypeInt) && (type != TypeInt64) && (type != TypeFloat) && (type != TypeString) && (type != TypeBoolean))
-          throw SettingTypeException(*this, idx);
+      case TypeInt:
+        ns = 0;
+        break;
+
+      case TypeInt64:
+        ns = INT64_CONST(0);
+        break;
+
+      case TypeFloat:
+        ns = 0.0;
+        break;
+
+      case TypeString:
+        ns = (char *)NULL;
+        break;
+
+      case TypeBoolean:
+        ns = false;
+        break;
+
+      default:
+        // won't happen
+        break;
       }
+
+      return (ns);
     }
-
-    int typecode = __toTypeCode(type);
-    config_setting_t *s = config_setting_add(_setting, NULL, typecode);
-
-    Setting &ns = wrapSetting(s);
-
-    switch (type)
+    catch (const SettingTypeException &)
     {
-    case TypeInt:
-      ns = 0;
-      break;
-
-    case TypeInt64:
-      ns = INT64_CONST(0);
-      break;
-
-    case TypeFloat:
-      ns = 0.0;
-      break;
-
-    case TypeString:
-      ns = (char *)NULL;
-      break;
-
-    case TypeBoolean:
-      ns = false;
-      break;
-
-    default:
-      // won't happen
-      break;
+      throw;
     }
-
-    return (ns);
   }
 
   // ---------------------------------------------------------------------------
 
-  void Setting::assertType(Setting::Type type) const throw(SettingTypeException)
+  void Setting::assertType(Setting::Type type) const
   {
-    if (type != _type)
+    try
     {
-      if (!(isNumber() && config_get_auto_convert(_setting->config) && ((type == TypeInt) || (type == TypeInt64) || (type == TypeFloat))))
-        throw SettingTypeException(*this);
+      if (type != _type)
+      {
+        if (!(isNumber() && config_get_auto_convert(_setting->config) && ((type == TypeInt) || (type == TypeInt64) || (type == TypeFloat))))
+          throw SettingTypeException(*this);
+      }
+    }
+    catch (const some_exception &)
+    {
+      throw;
     }
   }
 

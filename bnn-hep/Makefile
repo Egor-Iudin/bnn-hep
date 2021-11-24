@@ -2,8 +2,8 @@
 CC = g++
 INCLUDE = -Iinclude -I../libconfig/ -I$(shell root-config --incdir) -I${BOOST_LIBRARY_PATH}include/boost/
 OPFLAGS = 
-CFLAGS = -Wall -fopenmp -Wextra -std=c++17 $(INCLUDE) $(OPFLAGS)
-LDFLAGS = $(shell root-config --libs) -lTreePlayer -L${BOOST_LIBRARY_PATH}lib/ -libboost_filesystem -libboost_system -fopenmp 
+CFLAGS = -Wall -fopenmp -Wextra $(sell root-config --cflags) $(INCLUDE) $(OPFLAGS)
+LDFLAGS = $(shell root-config --libs) -lTreePlayer -L${BOOST_LIBRARY_PATH}lib/ -lboost_filesystem -lboost_system -fopenmp 
 EXECUTABLE = bnn-hep
 SOURCES = $(shell ls src/ | grep .cpp)
 OBJECTS = $(SOURCES:.cpp=.o)

@@ -238,13 +238,13 @@ Config::Config(string const &fileName, Logger &log_):
 }
 
 
-Setting const & Config::LookupSetting(string const &path) throw()
+Setting const & Config::LookupSetting(string const &path)
 {
     return ExpandSetting(cfg.lookup(path));
 }
 
 
-Setting const & Config::LookupMandatorySetting(string const &path) throw()
+Setting const & Config::LookupMandatorySetting(string const &path)
 {
     try
     {
@@ -259,7 +259,7 @@ Setting const & Config::LookupMandatorySetting(string const &path) throw()
 }
 
 
-Setting const & Config::ExpandSetting(Setting const &setting) throw()
+Setting const & Config::ExpandSetting(Setting const &setting)
 {
     if (setting.getType() == Setting::Type::TypeString)
     {

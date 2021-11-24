@@ -8,4 +8,4 @@ CFLAGS = -O $(shell root-config --cflags)     # C compiler options when compilin
 #CFLAGS = -pthread -std=c++11 -m64 -I/cvmfs/cms.cern.ch/slc7_amd64_gcc900/lcg/root/6.24.07-db9b7135424812ed5b8723a7a77f4016/include
 #CFLAGS = -pthread -lstdc=c++11 -m64 -I/cvmfs/cms.cern.ch/slc7_amd64_gcc900/lcg/root/6.24.07-db9b7135424812ed5b8723a7a77f4016/include
 
-LFLAGS = $(shell root-config --libs) -lstdc++ # Options when linking .o files; sometimes -lstdc++ option is needed
+LFLAGS = $(shell root-config --libs) -lstdc++ -ltbb# Options when linking .o files; sometimes -lstdc++ option is needed

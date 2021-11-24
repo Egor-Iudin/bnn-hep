@@ -232,8 +232,7 @@ namespace libconfig
     Setting &operator=(const char *value);
     Setting &operator=(const std::string &value);
 
-    Setting &operator[](const char *key) const
-        throw(SettingTypeException, SettingNotFoundException);
+    Setting &operator[](const char *key) const;
 
     inline Setting &operator[](const std::string &key) const
         throw(SettingTypeException, SettingNotFoundException)
@@ -241,8 +240,7 @@ namespace libconfig
       return (operator[](key.c_str()));
     }
 
-    Setting &operator[](int index) const
-        throw(SettingTypeException, SettingNotFoundException);
+    Setting &operator[](int index) const;
 
     bool lookupValue(const char *name, bool &value) const throw();
     bool lookupValue(const char *name, int &value) const throw();
@@ -309,14 +307,14 @@ namespace libconfig
       return (lookupValue(name.c_str(), value));
     }
 
-    void remove(const char *name) throw(SettingTypeException, SettingNotFoundException);
+    void remove(const char *name);
 
-    inline void remove(const std::string &name) throw(SettingTypeException, SettingNotFoundException)
+    inline void remove(const std::string &name)
     {
       remove(name.c_str());
     }
 
-    void remove(unsigned int idx) throw(SettingTypeException, SettingNotFoundException);
+    void remove(unsigned int idx);
 
     inline Setting &add(const std::string &name, Type type) throw(SettingNameException, SettingTypeException)
     {
@@ -325,7 +323,7 @@ namespace libconfig
 
     Setting &add(const char *name, Type type) throw(SettingNameException, SettingTypeException);
 
-    Setting &add(Type type) throw(SettingTypeException);
+    Setting &add(Type type);
 
     inline bool exists(const std::string &name) const throw()
     {
@@ -406,25 +404,24 @@ namespace libconfig
     void setIncludeDir(const char *includeDir) throw();
     const char *getIncludeDir() const throw();
 
-    void read(FILE *stream) throw(ParseException);
+    void read(FILE *stream);
     void write(FILE *stream) const;
 
-    void readString(const char *str) throw(ParseException);
-    inline void readString(const std::string &str) throw(ParseException)
+    void readString(const char *str);
+    inline void readString(const std::string &str)
     {
       return (readString(str.c_str()));
     }
 
-    void readFile(const char *filename) throw(FileIOException, ParseException);
-    void writeFile(const char *filename) throw(FileIOException);
+    void readFile(const char *filename);
+    void writeFile(const char *filename);
 
     inline Setting &lookup(const std::string &path) const
-        throw(SettingNotFoundException)
     {
       return (lookup(path.c_str()));
     }
 
-    Setting &lookup(const char *path) const throw(SettingNotFoundException);
+    Setting &lookup(const char *path) const;
 
     inline bool exists(const std::string &path) const throw()
     {

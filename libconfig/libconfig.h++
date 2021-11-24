@@ -235,7 +235,6 @@ namespace libconfig
     Setting &operator[](const char *key) const;
 
     inline Setting &operator[](const std::string &key) const
-        throw(SettingTypeException, SettingNotFoundException)
     {
       return (operator[](key.c_str()));
     }

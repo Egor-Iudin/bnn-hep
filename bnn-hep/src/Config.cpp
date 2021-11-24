@@ -266,7 +266,7 @@ Setting const &Config::ExpandSetting(Setting const &setting)
 
         return setting;
     }
-    catch (const some_exception &)
+    catch (const SettingNotFoundException &)
     {
         throw;
     }

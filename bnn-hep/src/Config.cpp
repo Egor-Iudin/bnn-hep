@@ -225,9 +225,17 @@ Config::Config(string const &fileName, Logger &log_) : log(log_)
     log << info(2) << "The configuration file is parsed and checked." << eom;
 }
 
-Setting const &Config::LookupSetting(string const &path) throw(SettingNotFoundException)
+Setting const &Config::LookupSetting(string const &path)
 {
-    return ExpandSetting(cfg.lookup(path));
+    try
+    {
+
+        return ExpandSetting(cfg.lookup(path));
+    }
+    catch (const SettingNotFoundException &)
+    {
+        throw;
+    }
 }
 
 Setting const &Config::LookupMandatorySetting(string const &path) throw()
@@ -244,17 +252,24 @@ Setting const &Config::LookupMandatorySetting(string const &path) throw()
     }
 }
 
-Setting const &Config::ExpandSetting(Setting const &setting) throw(SettingNotFoundException)
+Setting const &Config::ExpandSetting(Setting const &setting)
 {
-    if (setting.getType() == Setting::Type::TypeString)
+    try
     {
-        string const value = static_cast<char const *>(setting);
+        if (setting.getType() == Setting::Type::TypeString)
+        {
+            string const value = static_cast<char const *>(setting);
 
-        if (value.length() > 0 and value[0] == '@')
-            return ExpandSetting(cfg.lookup(value.substr(1))); // recursion is allowed
+            if (value.length() > 0 and value[0] == '@')
+                return ExpandSetting(cfg.lookup(value.substr(1))); // recursion is allowed
+        }
+
+        return setting;
     }
-
-    return setting;
+    catch (const some_exception &)
+    {
+        throw;
+    }
 }
 
 void Config::ReadSamples(string const &path, unsigned type, string const &defTrainWeight,

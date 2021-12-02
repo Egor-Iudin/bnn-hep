@@ -1,9 +1,9 @@
 # Define the flags to control make
 CC = g++
-INCLUDE = -Iinclude -I../libconfig/ -I$(shell root-config --incdir) -I${BOOST_LIBRARY_PATH}include/boost-${BOOST_VERSION}/
+INCLUDE = -Iinclude -I../libconfig/ -I$(shell root-config --incdir) -I${LD_LIBRARY_PATH}
 OPFLAGS = 
-CFLAGS = -Wall -fopenmp -Wextra -std=c++11 $(INCLUDE) $(OPFLAGS)
-LDFLAGS = $(shell root-config --libs) -lTreePlayer -L${BOOST_LIBRARY_PATH}lib/ -lboost_filesystem-gcc48-mt-${BOOST_VERSION} -lboost_system-gcc48-mt-${BOOST_VERSION} -fopenmp 
+CFLAGS = -Wall -fopenmp -Wextra -std=c++17 $(INCLUDE) $(OPFLAGS)
+LDFLAGS = $(shell root-config --libs) -lTreePlayer -L${LD_LIBRARY_PATH} -lboost_filesystem -lboost_system -fopenmp 
 EXECUTABLE = bnn-hep
 SOURCES = $(shell ls src/ | grep .cpp)
 OBJECTS = $(SOURCES:.cpp=.o)

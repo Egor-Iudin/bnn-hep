@@ -67,7 +67,7 @@ namespace libconfig
 
     const char *getPath();
 
-    virtual const char *what() const noexcept;
+    virtual const char *what() noexcept;
 
   protected:
     SettingException(const Setting &setting);
@@ -85,7 +85,7 @@ namespace libconfig
     friend class Setting;
 
   public:
-    const char *what() const noexcept;
+    const char *what() noexcept;
 
   private:
     SettingTypeException(const Setting &setting);
@@ -99,7 +99,7 @@ namespace libconfig
     friend class Setting;
 
   public:
-    const char *what() const noexcept;
+    const char *what() noexcept;
 
   private:
     SettingNotFoundException(const Setting &setting, int idx);
@@ -113,7 +113,7 @@ namespace libconfig
     friend class Setting;
 
   public:
-    const char *what() const noexcept;
+    const char *what() noexcept;
 
   private:
     SettingNameException(const Setting &setting, const char *name);
@@ -122,7 +122,7 @@ namespace libconfig
   class LIBCONFIGXX_API FileIOException : public ConfigException
   {
   public:
-    const char *what() const noexcept;
+    const char *what() noexcept;
   };
 
   class LIBCONFIGXX_API ParseException : public ConfigException
@@ -134,22 +134,22 @@ namespace libconfig
 
     virtual ~ParseException() noexcept;
 
-    inline const char *getFile() const noexcept
+    inline const char *getFile() noexcept
     {
       return (_file);
     }
 
-    inline int getLine() const noexcept
+    inline int getLine() noexcept
     {
       return (_line);
     }
 
-    inline const char *getError() const noexcept
+    inline const char *getError() noexcept
     {
       return (_error);
     }
 
-    const char *what() const noexcept;
+    const char *what() noexcept;
 
   private:
     ParseException(const char *file, int line, const char *error);
@@ -201,9 +201,9 @@ namespace libconfig
   public:
     virtual ~Setting() noexcept;
 
-    inline Type getType() const noexcept { return (_type); }
+    inline Type getType() noexcept { return (_type); }
 
-    inline Format getFormat() const noexcept { return (_format); }
+    inline Format getFormat() noexcept { return (_format); }
     void setFormat(Format format) noexcept;
 
     operator bool();
@@ -241,43 +241,38 @@ namespace libconfig
 
     Setting &operator[](int index);
 
-    bool lookupValue(const char *name, bool &value) const noexcept;
-    bool lookupValue(const char *name, int &value) const noexcept;
-    bool lookupValue(const char *name, unsigned int &value) const noexcept;
-    bool lookupValue(const char *name, long long &value) const noexcept;
-    bool lookupValue(const char *name, unsigned long long &value)
-        const noexcept;
-    bool lookupValue(const char *name, double &value) const noexcept;
-    bool lookupValue(const char *name, float &value) const noexcept;
-    bool lookupValue(const char *name, const char *&value) const noexcept;
-    bool lookupValue(const char *name, std::string &value) const noexcept;
+    bool lookupValue(const char *name, bool &value) noexcept;
+    bool lookupValue(const char *name, int &value) noexcept;
+    bool lookupValue(const char *name, unsigned int &value) noexcept;
+    bool lookupValue(const char *name, long long &value) noexcept;
+    bool lookupValue(const char *name, unsigned long long &value) noexcept;
+    bool lookupValue(const char *name, double &value) noexcept;
+    bool lookupValue(const char *name, float &value) noexcept;
+    bool lookupValue(const char *name, const char *&value) noexcept;
+    bool lookupValue(const char *name, std::string &value) noexcept;
 
-    inline bool lookupValue(const std::string &name, bool &value)
-        const noexcept
+    inline bool lookupValue(const std::string &name, bool &value) noexcept
     {
       return (lookupValue(name.c_str(), value));
     }
 
-    inline bool lookupValue(const std::string &name, int &value)
-        const noexcept
+    inline bool lookupValue(const std::string &name, int &value) noexcept
     {
       return (lookupValue(name.c_str(), value));
     }
 
-    inline bool lookupValue(const std::string &name, unsigned int &value)
-        const noexcept
+    inline bool lookupValue(const std::string &name, unsigned int &value) noexcept
     {
       return (lookupValue(name.c_str(), value));
     }
 
-    inline bool lookupValue(const std::string &name, long long &value)
-        const noexcept
+    inline bool lookupValue(const std::string &name, long long &value) noexcept
     {
       return (lookupValue(name.c_str(), value));
     }
 
     inline bool lookupValue(const std::string &name,
-                            unsigned long long &value) const noexcept
+                            unsigned long long &value) noexcept
     {
       return (lookupValue(name.c_str(), value));
     }
@@ -324,55 +319,55 @@ namespace libconfig
 
     Setting &add(Type type);
 
-    inline bool exists(const std::string &name) const noexcept
+    inline bool exists(const std::string &name) noexcept
     {
       return (exists(name.c_str()));
     }
 
-    bool exists(const char *name) const noexcept;
+    bool exists(const char *name) noexcept;
 
-    int getLength() const noexcept;
-    const char *getName() const noexcept;
+    int getLength() noexcept;
+    const char *getName() noexcept;
     std::string getPath();
-    int getIndex() const noexcept;
+    int getIndex() noexcept;
 
     const Setting &getParent();
     Setting &getParent();
 
-    bool isRoot() const noexcept;
+    bool isRoot() noexcept;
 
-    inline bool isGroup() const noexcept
+    inline bool isGroup() noexcept
     {
       return (_type == TypeGroup);
     }
 
-    inline bool isArray() const noexcept
+    inline bool isArray() noexcept
     {
       return (_type == TypeArray);
     }
 
-    inline bool isList() const noexcept
+    inline bool isList() noexcept
     {
       return (_type == TypeList);
     }
 
-    inline bool isAggregate() const noexcept
+    inline bool isAggregate() noexcept
     {
       return (_type >= TypeGroup);
     }
 
-    inline bool isScalar() const noexcept
+    inline bool isScalar() noexcept
     {
       return ((_type > TypeNone) && (_type < TypeGroup));
     }
 
-    inline bool isNumber() const noexcept
+    inline bool isNumber() noexcept
     {
       return ((_type == TypeInt) || (_type == TypeInt64) || (_type == TypeFloat));
     }
 
-    unsigned int getSourceLine() const noexcept;
-    const char *getSourceFile() const noexcept;
+    unsigned int getSourceLine() noexcept;
+    const char *getSourceFile() noexcept;
   };
 
   class LIBCONFIGXX_API Config
@@ -398,10 +393,10 @@ namespace libconfig
     }
 
     void setTabWidth(unsigned short width) noexcept;
-    unsigned short getTabWidth() const noexcept;
+    unsigned short getTabWidth() noexcept;
 
     void setIncludeDir(const char *includeDir) noexcept;
-    const char *getIncludeDir() const noexcept;
+    const char *getIncludeDir() noexcept;
 
     void read(FILE *stream);
     void write(FILE *stream);
@@ -423,72 +418,65 @@ namespace libconfig
 
     Setting &lookup(const char *path);
 
-    inline bool exists(const std::string &path) const noexcept
+    inline bool exists(const std::string &path) noexcept
     {
       return (exists(path.c_str()));
     }
 
-    bool exists(const char *path) const noexcept;
+    bool exists(const char *path) noexcept;
 
-    bool lookupValue(const char *path, bool &value) const noexcept;
-    bool lookupValue(const char *path, int &value) const noexcept;
-    bool lookupValue(const char *path, unsigned int &value) const noexcept;
-    bool lookupValue(const char *path, long long &value) const noexcept;
-    bool lookupValue(const char *path, unsigned long long &value)
-        const noexcept;
-    bool lookupValue(const char *path, double &value) const noexcept;
-    bool lookupValue(const char *path, float &value) const noexcept;
-    bool lookupValue(const char *path, const char *&value) const noexcept;
-    bool lookupValue(const char *path, std::string &value) const noexcept;
+    bool lookupValue(const char *path, bool &value) noexcept;
+    bool lookupValue(const char *path, int &value) noexcept;
+    bool lookupValue(const char *path, unsigned int &value) noexcept;
+    bool lookupValue(const char *path, long long &value) noexcept;
+    bool lookupValue(const char *path, unsigned long long &value) noexcept;
+    bool lookupValue(const char *path, double &value) noexcept;
+    bool lookupValue(const char *path, float &value) noexcept;
+    bool lookupValue(const char *path, const char *&value) noexcept;
+    bool lookupValue(const char *path, std::string &value) noexcept;
 
-    inline bool lookupValue(const std::string &path, bool &value) const noexcept
+    inline bool lookupValue(const std::string &path, bool &value) noexcept
     {
       return (lookupValue(path.c_str(), value));
     }
 
-    inline bool lookupValue(const std::string &path, int &value) const noexcept
+    inline bool lookupValue(const std::string &path, int &value) noexcept
     {
       return (lookupValue(path.c_str(), value));
     }
 
-    inline bool lookupValue(const std::string &path, unsigned int &value)
-        const noexcept
+    inline bool lookupValue(const std::string &path, unsigned int &value) noexcept
     {
       return (lookupValue(path.c_str(), value));
     }
 
-    inline bool lookupValue(const std::string &path, long long &value)
-        const noexcept
+    inline bool lookupValue(const std::string &path, long long &value) noexcept
     {
       return (lookupValue(path.c_str(), value));
     }
 
     inline bool lookupValue(const std::string &path,
-                            unsigned long long &value) const noexcept
+                            unsigned long long &value) noexcept
     {
       return (lookupValue(path.c_str(), value));
     }
 
-    inline bool lookupValue(const std::string &path, double &value)
-        const noexcept
+    inline bool lookupValue(const std::string &path, double &value) noexcept
     {
       return (lookupValue(path.c_str(), value));
     }
 
-    inline bool lookupValue(const std::string &path, float &value)
-        const noexcept
+    inline bool lookupValue(const std::string &path, float &value) noexcept
     {
       return (lookupValue(path.c_str(), value));
     }
 
-    inline bool lookupValue(const std::string &path, const char *&value)
-        const noexcept
+    inline bool lookupValue(const std::string &path, const char *&value) noexcept
     {
       return (lookupValue(path.c_str(), value));
     }
 
-    inline bool lookupValue(const std::string &path, std::string &value)
-        const noexcept
+    inline bool lookupValue(const std::string &path, std::string &value) noexcept
     {
       return (lookupValue(path.c_str(), value));
     }

@@ -95,7 +95,7 @@ private:
          * form "@another-path" the path is expanded accordingly. Recursion is allowed and there is
          * no protection against the loop references.
          */
-    Setting const &LookupSetting(string const &path) throw(SettingNotFoundException);
+    Setting const &LookupSetting(string const &path);
 
     /**
          * \brief Finds the setting given its path. Does not throw exceptions.
@@ -105,7 +105,7 @@ private:
          * no protection against the loop references. If the setting is not found an error is
          * printed and the program is terminated.
          */
-    Setting const &LookupMandatorySetting(string const &path) throw();
+    Setting const &LookupMandatorySetting(string const &path) noexcept;
 
     /**
          * \brief Processes the recursive references.
@@ -113,7 +113,7 @@ private:
          * Checks if the given setting is a reference and expands it accordingly. Recursion is
          * allowed and there is no protection against the loop references.
          */
-    Setting const &ExpandSetting(Setting const &setting) throw(SettingNotFoundException);
+    Setting const &ExpandSetting(Setting const &setting);
 
     /**
          * \brief Reads a parameter given its path.
